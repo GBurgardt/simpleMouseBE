@@ -1,25 +1,24 @@
+console.log('expresssss')
+
 var express = require('express');
-var app = express();
+var expressApp = express();
 const robot = require("robotjs");
 
 //////////////////////////////////////
 ////////// Configuraciones ///////////
 //////////////////////////////////////
 const cors = require('cors')
-app.use(cors());
+expressApp.use(cors());
 //////////////////////////////////////
 //////// Fin Configuraciones /////////
 //////////////////////////////////////
 
 
-app.get('/', function (req, res) {
-    res.render('index', {
-        title: 'Hey',
-        message: 'Helasjdo'
-    })
+expressApp.get('/', function (req, res) {
+    res.send('Hello World!');
 });
 
-app.get('/mouse/move/:deltaX/:deltaY', function (req, res) {
+expressApp.get('/mouse/move/:deltaX/:deltaY', function (req, res) {
     
     const mousePosi = robot.getMousePos();
 
@@ -40,7 +39,7 @@ app.get('/mouse/move/:deltaX/:deltaY', function (req, res) {
     })
 });
 
-app.get('/mouse/click/:type', function (req, res) {
+expressApp.get('/mouse/click/:type', function (req, res) {
 
     const type = req.params.type;
 
@@ -50,21 +49,8 @@ app.get('/mouse/click/:type', function (req, res) {
 
 })
 
-
-app.set('views', `${__dirname}/views`);
-
-app.set('view engine', 'pug');
-
-console.log(__dirname);
-
-// require('./build/' + cmd + '.js')
-// path.join(__dirname, 'views/' + viewName)
-
-app.listen(3000, function () {
-
-    console.log('Andando')
-
-
+expressApp.listen(3000, function () {
+  console.log('Listening on port 3000!');
 });
 
 
