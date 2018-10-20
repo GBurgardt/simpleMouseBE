@@ -1,5 +1,3 @@
-console.log('expresssss')
-
 var express = require('express');
 var expressApp = express();
 const robot = require("robotjs");
@@ -49,9 +47,11 @@ expressApp.get('/mouse/click/:type', function (req, res) {
 
 })
 
-expressApp.listen(3000, function () {
-  console.log('Listening on port 3000!');
-});
+expressApp
+    .listen(8000, function () {
+        // alert('vamaaa')
+        console.log('Listening on port 8000!');
+    });
 
 
 
