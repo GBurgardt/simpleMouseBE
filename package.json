@@ -11,6 +11,7 @@
         "electron:start": "npm run electron:rebuild && electron .",
         "electron:win": "electron-packager --electron-version=3.0.4 --overwrite --platform=win32 .",
         "electron:win32": "electron-packager --electron-version=3.0.4 --overwrite --platform=win32 --arch=ia32 .",
+        
         "electron:linux": "electron-packager --electron-version=3.0.4 --overwrite --platform=linux ."
     },
     "repository": {
