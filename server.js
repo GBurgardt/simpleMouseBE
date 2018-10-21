@@ -1,5 +1,7 @@
 var express = require('express');
-var expressApp = express();
+var app = express();
+
+
 const robot = require("robotjs");
 
 //////////////////////////////////////
@@ -7,17 +9,18 @@ const robot = require("robotjs");
 //////////////////////////////////////
 
 const cors = require('cors')
-expressApp.use(cors());
+app.use(cors());
 
 //////////////////////////////////////
 //////// Fin Configuraciones /////////
 //////////////////////////////////////
 
-expressApp.get('/', function (req, res) {
+app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 
-expressApp.get('/mouse/move/:deltaX/:deltaY', function (req, res) {
+
+app.get('/mouse/move/:deltaX/:deltaY', function (req, res) {
     
     const mousePosi = robot.getMousePos();
 
@@ -35,9 +38,23 @@ expressApp.get('/mouse/move/:deltaX/:deltaY', function (req, res) {
     })
 });
 
-expressApp.get('/mouse/click/:type', function (req, res) {
+app.get('/mouse/click/:type', function (req, res) {
     const type = req.params.type;
     robot.mouseClick(type)
+    res.send('ok')
+})
+
+app.get('/mouse/scroll/:deltaX/:deltaY', function (req, res) {
+    
+    const deltaX = Number(req.params.deltaX);
+    const deltaY = Number(req.params.deltaY);
+
+    robot.scrollMouse(0, deltaY)
+
+    // setTimeout(() => {
+    //     robot.scrollMouse(0, 50)
+    // }, 200)
+
     res.send('ok')
 })
 
@@ -46,7 +63,9 @@ expressApp.get('/mouse/click/:type', function (req, res) {
 /////////// Inicialización ///////////
 //////////////////////////////////////
 
-expressApp.listen(
+
+
+app.listen(
     5000, 
     () => {
         console.log('Listening on port 5000!');

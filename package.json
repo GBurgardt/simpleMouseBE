@@ -2,17 +2,15 @@
     "name": "simplemousecontrol-be",
     "version": "1.0.0",
     "description": "",
-    "main": "app.js",
+    "main": "index.html",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "server:start": "node server.js",
-        "electron:rebuildold": "npm rebuild --runtime=electron --target=3.0.3 --disturl=https://atom.io/download/atom-shell --abi=48",
-        "electron:rebuild": "npm rebuild --runtime=electron --target=3.0.3 --disturl=https://atom.io/download/atom-shell --abi=51",
-        "electron:start": "npm run electron:rebuild && electron .",
-        "electron:win": "electron-packager --electron-version=3.0.4 --overwrite --platform=win32 .",
-        "electron:win32": "electron-packager --electron-version=3.0.4 --overwrite --platform=win32 --arch=ia32 .",
-        
-        "electron:linux": "electron-packager --electron-version=3.0.4 --overwrite --platform=linux ."
+        "nw:rebuild": "nw-gyp rebuild --target=0.33.0 ./node_modules/robotjs",
+        "nw:start": "npm run nw:rebuild && nw .",
+        "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
+        "dist:win": "build --tasks win-x86 --mirror https://dl.nwjs.io/ .",
+        "dist:linux": "build --tasks linux-x64 --mirror https://dl.nwjs.io/ .",
+        "start": "run --x86 --mirror https://dl.nwjs.io/ ."
     },
     "repository": {
         "type": "git",
@@ -24,14 +22,12 @@
     "dependencies": {
         "cors": "^2.8.4",
         "express": "^4.16.4",
-        "ffi": "^2.2.0"
+        "robotjs": "^0.5.1"
     },
     "devDependencies": {
-        "electron": "^3.0.4",
-        "electron-packager": "^12.2.0",
-        "electron-rebuild": "^1.8.2"
+        "nwjs-builder-phoenix": "^1.14.8"
     },
     "build": {
-        "appId": "com.simplemousecontrol.burgardt"
+        "nwVersion": "0.33.0"
     }
 }
